@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>30-Day Sales Team Assessment</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+            background: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background: white;
+            min-height: 100vh;
+        }
+        
+        .header {
+            margin-bottom: 40px;
+            text-align: center;
+            border-bottom: 3px solid #3DFFA0;
+            padding-bottom: 20px;
+        }
+        
+        h1 {
+            font-size: 28px;
+            color: #0A0A0C;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .subtitle {
+            font-size: 14px;
+            color: #666;
+            font-weight: 400;
+        }
+        
+        .intro {
+            background: #f9f9f9;
+            padding: 20px;
+            border-left: 4px solid #3DFFA0;
+            margin-bottom: 30px;
+            font-size: 14px;
+            line-height: 1.7;
+        }
+        
+        .intro p {
+            margin-bottom: 8px;
+        }
+        
+        .intro strong {
+            color: #0A0A0C;
+        }
+        
+        .scale-info {
+            background: #fafafa;
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 30px;
+            font-size: 13px;
+        }
+        
+        .scale-info h3 {
+            color: #0A0A0C;
+            font-size: 14px;
+            margin-bottom: 10px;
+            font-weight: 600;
+        }
+        
+        .scale-item {
+            margin-bottom: 6px;
+            color: #555;
+        }
+        
+        .scale-item strong {
+            color: #3DFFA0;
+            min-width: 60px;
+            display: inline-block;
+        }
+        
+        .question-block {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        
+        .question-block:last-of-type {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        
+        .question-number {
+            display: inline-block;
+            background: #3DFFA0;
+            color: #0A0A0C;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            text-align: center;
+            line-height: 28px;
+            font-weight: 600;
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+        
+        .question-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #0A0A0C;
+            margin-bottom: 8px;
+        }
+        
+        .question-text {
+            font-size: 14px;
+            color: #555;
+            margin-bottom: 14px;
+            line-height: 1.6;
+        }
+        
+        .score-input {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-top: 14px;
+        }
+        
+        .score-input label {
+            font-size: 13px;
+            font-weight: 500;
+            color: #666;
+            white-space: nowrap;
+        }
+        
+        .score-input input {
+            width: 60px;
+            padding: 8px 12px;
+            border: 2px solid #e5e5e5;
+            border-radius: 4px;
+            font-size: 16px;
+            font-weight: 600;
+            color: #3DFFA0;
+            text-align: center;
+            transition: border-color 0.2s;
+        }
+        
+        .score-input input:focus {
+            outline: none;
+            border-color: #3DFFA0;
+        }
+        
+        .score-input .range-hint {
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .results-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 2px solid #3DFFA0;
+        }
+        
+        .results-section h2 {
+            font-size: 18px;
+            color: #0A0A0C;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        
+        .score-card {
+            background: linear-gradient(135deg, #3DFFA0 0%, #2ed889 100%);
+            color: #0A0A0C;
+            padding: 24px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .score-card .total {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+        
+        .score-card .label {
+            font-size: 13px;
+            opacity: 0.9;
+        }
+        
+        .band-label {
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            margin-top: 12px;
+        }
+        
+        .interpretation {
+            background: #f9f9f9;
+            padding: 16px;
+            border-radius: 6px;
+            margin-bottom: 16px;
+            font-size: 13px;
+            line-height: 1.6;
+            color: #555;
+        }
+        
+        .interpretation strong {
+            color: #0A0A0C;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+        }
+        
+        .btn {
+            flex: 1;
+            padding: 12px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+        }
+        
+        .btn-primary {
+            background: #3DFFA0;
+            color: #0A0A0C;
+        }
+        
+        .btn-primary:hover {
+            background: #2ed889;
+            transform: translateY(-2px);
+        }
+        
+        .btn-secondary {
+            background: #e5e5e5;
+            color: #0A0A0C;
+        }
+        
+        .btn-secondary:hover {
+            background: #d5d5d5;
+        }
+        
+        .hidden {
+            display: none;
+        }
+        
+        .footer-note {
+            text-align: center;
+            font-size: 12px;
+            color: #999;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 1px solid #e5e5e5;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>30-Day Sales Team Assessment</h1>
+            <p class="subtitle">Diagnostic framework for new sales leaders</p>
+        </div>
+        
+        <div class="intro">
+            <p><strong>Your role:</strong> Director of Sales at Geidea</p>
+            <p><strong>Timeline:</strong> 3 months into role</p>
+            <p style="margin-top: 12px;">As a new Director of Sales, you're evaluating whether your current team can execute against your first-quarter targets. Rate your team honestly on each dimension below.</p>
+        </div>
+        
+        <div class="scale-info">
+            <h3>How to score:</h3>
+            <div class="scale-item"><strong>1</strong> Not in place – Gap is acute</div>
+            <div class="scale-item"><strong>2</strong> Partial – Exists, but with gaps</div>
+            <div class="scale-item"><strong>3</strong> Established – Core capability exists</div>
+            <div class="scale-item"><strong>4</strong> Strong – Capability is solid</div>
+            <div class="scale-item"><strong>5</strong> Exceptional – Competitive advantage</div>
+        </div>
+        
+        <form id="assessmentForm">
+            <div class="question-block">
+                <div class="question-number">1</div>
+                <div class="question-title">Sales Process Clarity & Alignment</div>
+                <div class="question-text">Do all AEs follow the same funnel definition, stage criteria, and deal progression logic? Is your process documented and executed consistently?</div>
+                <div class="score-input">
+                    <label for="q1">Score:</label>
+                    <input type="number" id="q1" name="q1" min="1" max="5" placeholder="1–5">
+                    <span class="range-hint">1–5</span>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-number">2</div>
+                <div class="question-title">Pipeline Quality & Forecasting Accuracy</div>
+                <div class="question-text">How confident are you in your forecast? When you look at your 30/60/90-day pipeline, do you believe the numbers?</div>
+                <div class="score-input">
+                    <label for="q2">Score:</label>
+                    <input type="number" id="q2" name="q2" min="1" max="5" placeholder="1–5">
+                    <span class="range-hint">1–5</span>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-number">3</div>
+                <div class="question-title">Sales Enablement & Product Knowledge</div>
+                <div class="question-text">Can your AEs speak with deep conviction about your product's differentiation? How consistently do they position against competitors?</div>
+                <div class="score-input">
+                    <label for="q3">Score:</label>
+                    <input type="number" id="q3" name="q3" min="1" max="5" placeholder="1–5">
+                    <span class="range-hint">1–5</span>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-number">4</div>
+                <div class="question-title">Recruitment & Team Composition</div>
+                <div class="question-text">Do you have the right people in your current team? Are there specific skills, profiles, or seniority gaps?</div>
+                <div class="score-input">
+                    <label for="q4">Score:</label>
+                    <input type="number" id="q4" name="q4" min="1" max="5" placeholder="1–5">
+                    <span class="range-hint">1–5</span>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-number">5</div>
+                <div class="question-title">Compensation & Incentive Alignment</div>
+                <div class="question-text">Is your comp plan driving the behavior you want? Do your top performers feel fairly rewarded?</div>
+                <div class="score-input">
+                    <label for="q5">Score:</label>
+                    <input type="number" id="q5" name="q5" min="1" max="5" placeholder="1–5">
+                    <span class="range-hint">1–5</span>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-number">6</div>
+                <div class="question-title">Coaching, Feedback & Development</div>
+                <div class="question-text">How structured is your 1:1 coaching? Are you actively developing your AEs or firefighting?</div>
+                <div class="score-input">
+                    <label for="q6">Score:</label>
+                    <input type="number" id="q6" name="q6" min="1" max="5" placeholder="1–5">
+                    <span class="range-hint">1–5</span>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-number">7</div>
+                <div class="question-title">Data, Metrics & Team Transparency</div>
+                <div class="question-text">Do you have real-time visibility into activity, conversion, and productivity metrics by rep?</div>
+                <div class="score-input">
+                    <label for="q7">Score:</label>
+                    <input type="number" id="q7" name="q7" min="1" max="5" placeholder="1–5">
+                    <span class="range-hint">1–5</span>
+                </div>
+            </div>
+            
+            <div class="question-block">
+                <div class="question-number">8</div>
+                <div class="question-title">Culture, Morale & Retention Risk</div>
+                <div class="question-text">What's the pulse of your team? Do your best people see a future at Geidea under your leadership?</div>
+                <div class="score-input">
+                    <label for="q8">Score:</label>
+                    <input type="number" id="q8" name="q8" min="1" max="5" placeholder="1–5">
+                    <span class="range-hint">1–5</span>
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button type="button" class="btn btn-primary" onclick="calculateScore()">Calculate Your Score</button>
+                <button type="reset" class="btn btn-secondary">Reset</button>
+            </div>
+        </form>
+        
+        <div id="results" class="results-section hidden">
+            <h2>Your Assessment Results</h2>
+            
+            <div class="score-card">
+                <div class="total" id="totalScore">—</div>
+                <div class="label">Total Score out of 40</div>
+                <div class="band-label" id="bandLabel"></div>
+            </div>
+            
+            <div id="interpretation" class="interpretation"></div>
+            
+            <div class="button-group">
+                <button type="button" class="btn btn-primary" onclick="printResults()">Print or Save</button>
+            </div>
+        </div>
+        
+        <div class="footer-note">
+            <p>HAILO Consulting — AI-powered talent partner for high-growth SaaS & Fintech</p>
+        </div>
+    </div>
+    
+    <script>
+        function calculateScore() {
+            // Get all scores
+            const scores = [];
+            let allFilled = true;
+            
+            for (let i = 1; i <= 8; i++) {
+                const value = parseInt(document.getElementById(`q${i}`).value);
+                if (isNaN(value) || value < 1 || value > 5) {
+                    allFilled = false;
+                    break;
+                }
+                scores.push(value);
+            }
+            
+            if (!allFilled) {
+                alert('Please score all 8 questions with a number between 1 and 5.');
+                return;
+            }
+            
+            const total = scores.reduce((a, b) => a + b, 0);
+            
+            // Determine band
+            let band = '';
+            let bandColor = '';
+            let interpretation = '';
+            
+            if (total >= 8 && total <= 16) {
+                band = 'Foundational (Red)';
+                interpretation = `<strong>Your score: ${total}/40 — Foundational</strong><br><br>You have multiple acute gaps. Your team either lacks process maturity, faces acute talent gaps, or both. Your priority is stabilizing execution and building trust with leadership.<br><br><strong>Next steps:</strong> Identify your lowest-scoring dimensions and address them methodically. Consider bringing in external support to accelerate your progress.`;
+            } else if (total >= 17 && total <= 24) {
+                band = 'Emerging (Yellow)';
+                interpretation = `<strong>Your score: ${total}/40 — Emerging</strong><br><br>You have a foundation, but there are specific leaks. Identify your lowest-scoring questions and address them systematically over the next 60–90 days.<br><br><strong>Next steps:</strong> If pipeline quality is weak, build your sales process. If coaching is underdeveloped, systematize your 1:1s. If talent composition is wrong, start recruiting immediately.`;
+            } else if (total >= 25 && total <= 32) {
+                band = 'Mature (Green)';
+                interpretation = `<strong>Your score: ${total}/40 — Mature</strong><br><br>You're in good shape. Your team has core capability. Your job now is optimization: refining your process, deepening your data, raising your hiring bar, and preparing for scale.<br><br><strong>Next steps:</strong> Continue building competitive edges in your weaker areas. Keep recruiting top talent and stay innovative on process.`;
+            } else if (total >= 33 && total <= 40) {
+                band = 'Advanced (Blue)';
+                interpretation = `<strong>Your score: ${total}/40 — Advanced</strong><br><br>Your team is a business driver and competitive advantage. Protect and amplify what you've built. Keep recruiting, stay innovative on process, and think about how your sales engine supports company strategy.`;
+            }
+            
+            // Show results
+            document.getElementById('totalScore').textContent = total;
+            document.getElementById('bandLabel').textContent = band;
+            document.getElementById('interpretation').innerHTML = interpretation;
+            document.getElementById('results').classList.remove('hidden');
+            
+            // Scroll to results
+            document.getElementById('results').scrollIntoView({ behavior: 'smooth' });
+        }
+        
+        function printResults() {
+            window.print();
+        }
+    </script>
+</body>
+</html>
